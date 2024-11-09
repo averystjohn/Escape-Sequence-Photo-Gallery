@@ -15,44 +15,41 @@ const altTexts = [
 ];
 
 function addThumbnail(imageSource, altText) {
-  // 1.1 Create the element
+  // 1.1 Create the image element
   let image = document.createElement("img");
-  
-  // 1.2 Customize the element
-  image.setAttribute("src", imageSource);
-  image.setAttribute("alt", altText);  // Add alt text here
+
+  // 1.2 Set src and alt attributes
+  image.src = imageSource;
+  image.alt = altText; // Set alt text here for the thumbnail
   image.classList.add("thumbnail");
-  
-  // 1.3 Append the element
+
+  // 1.3 Append the image element to the thumbnail container
   let thumbnailContainer = document.getElementById("thumbnail-container");
   thumbnailContainer.appendChild(image);
-  
-  // 1.4 Add the onclick
+
+  // 1.4 Add click event to display full-size image
   image.addEventListener("click", function() {
     let fullsizeImage = document.getElementById("fullsize-image");
-    fullsizeImage.setAttribute("src", imageSource);
-    fullsizeImage.setAttribute("alt", altText);  // Set alt text for full-size image as well
+    fullsizeImage.src = imageSource;
+    fullsizeImage.alt = altText; // Set alt text for the full-size image
   });
 }
 
 function addAllThumbnails() {
-  // 2.1 Loop through imageSources
+  // Loop through imageSources and altTexts arrays to add thumbnails
   for (let i = 0; i < imageSources.length; i++) {
-    // 2.2 Call addThumbnail each iteration 
     addThumbnail(imageSources[i], altTexts[i]);
   }
 }
 
-// 2.3 Call addAllThumbnails
-addAllThumbnails();
-
-// Display the first image on page load.
+// Display the first image on page load
 function displayFirstImage() {
   let fullsizeImage = document.getElementById("fullsize-image");
-  fullsizeImage.setAttribute("src", imageSources[0]);
-  fullsizeImage.setAttribute("alt", altTexts[0]);  // Set alt text for the first image
+  fullsizeImage.src = imageSources[0];
+  fullsizeImage.alt = altTexts[0]; // Set alt text for the first image
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  addAllThumbnails();
   displayFirstImage();
 });
